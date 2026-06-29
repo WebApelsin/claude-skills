@@ -107,8 +107,8 @@ certainty.
 ## Report format
 
 ALWAYS use this structure. It is built for scannability: a strong `---` rule between findings,
-a thin `──────────` rule inside each finding, and real paragraphs — never single walls of text —
-in the prose blocks.
+blank lines separating the bands inside each finding, and real paragraphs — never single walls of
+text — in the prose blocks.
 
 ### Verdict
 
@@ -124,21 +124,19 @@ by a blank line:
 
 Use the `## Findings` heading, then a single, flat, globally numbered list ordered by severity
 (🔴 → 🟡 → 🟢) and numbered continuously so every finding has a unique number. **Separate each
-finding from the next with a `---` rule.** Inside each finding, split the three bands — header,
-body, footer — with a thin `──────────` line and surround every rule with blank lines:
+finding from the next with a `---` rule.** Inside each finding, separate the three bands — header,
+body, footer — with blank lines:
 
 ```
 ---
 
 **#<n> · <severity emoji> <Lens> · `<relative/path/File.cs:line>`**
 
-──────────
-
 <Body. State the problem in a sentence or two — what's wrong and why it bites. Then the
-recommendation as its own paragraph, prefixed `→`. Show the fix in a fenced code block when it's
-short and clarifying. Keep prose in paragraphs; never let it run on into one dense line.>
+recommendation inside a `> 💡` blockquote so it stands out. Show the fix in a fenced code block
+when it's short and clarifying. Keep prose in paragraphs; never let it run on into one dense line.>
 
-──────────
+> 💡 <The recommendation.>
 
 Effort: S|M|L · Risk if unfixed: High|Medium|Low · Confidence: High|Medium|Low
 ```
@@ -161,13 +159,9 @@ Example of one finding, for calibration:
 
 **#5 · 🔴 Async · `Services/OrderService.cs:142`**
 
-──────────
-
 Blocks on `.Result` inside a request path — risks deadlock under load and starves the thread pool.
 
-→ Make the call chain async end-to-end and `await` it; thread `CancellationToken` through.
-
-──────────
+> 💡 Make the call chain async end-to-end and `await` it; thread `CancellationToken` through.
 
 Effort: S · Risk if unfixed: High · Confidence: High
 ```
